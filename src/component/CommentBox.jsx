@@ -25,7 +25,7 @@ var CommentBox = React.createClass({
 	//异步请求数据渲染
 	componentDidMount:function(){
 		this.loadCommentsFromServer();
-		//setInterval(this.loadCommentsFromServer, this.props.pollInterval);
+		setInterval(this.loadCommentsFromServer, this.props.pollInterval);
 	},
 	render:function(){
 		return (
