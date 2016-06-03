@@ -18,6 +18,10 @@ var CommentBox = React.createClass({
 		});
 	},
 	handleCommentSubmit:function(comment){
+		//优化更新顺序,将最新的评论放在前
+		var comments = this.state.data;
+		var newComments = comments.concat([comment]);
+		this.setState({data:newComments});
 		$.ajax({
 			url:this.props.postUrl,
 			dataType:'json',
