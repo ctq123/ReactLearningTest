@@ -1,0 +1,4 @@
+学习react过程
+1.先配置好环境及安装相应的软件；
+2.快速上手第一个实例（http://ant.design/docs/react/getting-started）；
+3.根据实例中陌生的属性读react的API,了解相关基础知识（http://reactjs.cn/react/docs/top-level-api.html）；
