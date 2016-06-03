@@ -50,4 +50,5 @@ var Comment = React.createClass({
 	}
 });
 
+
 export default CommentBox;
