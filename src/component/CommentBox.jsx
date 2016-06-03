@@ -22,6 +22,7 @@ var CommentBox = React.createClass({
 		var comments = this.state.data;
 		var newComments = comments.concat([comment]);
 		this.setState({data:newComments});
+		
 		$.ajax({
 			url:this.props.postUrl,
 			dataType:'json',
