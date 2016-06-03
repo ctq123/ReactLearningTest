@@ -2,3 +2,5 @@
 1.先配置好环境及安装相应的软件；
 2.快速上手第一个实例（http://ant.design/docs/react/getting-started）；
 3.根据实例中陌生的属性读react的API,了解相关基础知识（http://reactjs.cn/react/docs/top-level-api.html）；
+4.根据React中文网跟着教程学习实时评论框实例，动态读取数据（http://reactjs.cn/react/docs/tutorial.html）
+5.动态从服务器获取数据ajax(需要引入jquery)，后端api不写提高效率，使用阿里rap(http://rap.taobao.org/org/index.do)
