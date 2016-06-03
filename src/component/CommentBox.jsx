@@ -40,10 +40,14 @@ var Comment = React.createClass({
 		return (
 			<div className="comment">
 				<h2 className="commentAuthor">
-					父类传进来的author属性为：
+					{	
+						//读取父类传进来的author属性
+					}
 					{this.props.author}
 				</h2>
-				父类传进来的内容属性为：
+				{	
+					//读取父类传进来的内容属性
+				}
 				{this.props.children}
 			</div>
 		);
