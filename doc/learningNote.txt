@@ -4,3 +4,4 @@
 3.根据实例中陌生的属性读react的API,了解相关基础知识（http://reactjs.cn/react/docs/top-level-api.html）；
 4.根据React中文网跟着教程学习实时评论框实例，动态读取数据（http://reactjs.cn/react/docs/tutorial.html）
 5.动态从服务器获取数据ajax(需要引入jquery)，后端api不写提高效率，使用阿里rap(http://rap.taobao.org/org/index.do)
+6.学习从java后台服务器动态获取数据（返回json格式给前端，允许跨域访问access-control）
