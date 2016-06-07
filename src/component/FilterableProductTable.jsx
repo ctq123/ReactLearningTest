@@ -1,41 +1,58 @@
-import React from 'react';
+import React  from 'react';
 
 var FilterableProductTable = React.createClass({
-	loadCommentsFromServer:function(){
-		$.ajax({
-			type: "get",
-			url:this.props.getUrl,
-			dataType:'json',
-			cache:false,
-			success:function(data){
-				console.log("FilterableProductTable.data="+data);
-				this.setState({data:data});
-			}.bind(this),
-			error:function(xhr,status,err){
-				console.error(this.props.getUrl, status, err.toString());
-			}.bind(this)
-		});
-	},
-	getInitialState:function(){
+	getInitialState() {
 		return {
-			data:[]
+			data: [],
+			filterText: '',
+			inStockOnly: false,
 		};
 	},
-	//异步请求数据渲染
-	componentDidMount:function(){
+	// 异步请求数据渲染
+	componentDidMount() {
 		this.loadCommentsFromServer();
-		//setInterval(this.loadCommentsFromServer, this.props.pollInterval);
+		// setInterval(this.loadCommentsFromServer, this.props.pollInterval);
 	},
-	render:function(){
+	loadCommentsFromServer() {
+		$.ajax({
+			type: 'get',
+			url: this.props.getUrl,
+			dataType: 'json',
+			cache: false,
+			success: (data) => {
+				console.log(`FilterableProductTable.data=${data}`);
+				this.setState({
+					data,
+				});
+			},
+			error: (xhr, status, err) => {
+				console.error(this.props.getUrl, status, err.toString());
+			},
+		});
+	},
+	handleUserInput(filterText, inStockOnly){
+		this.setState({
+			filterText,
+			inStockOnly,
+		});
+	},
+	render() {
 		return (
 			<div>
-				<SearchBar />
-				<ProductTable products={this.state.data}/>
+				<SearchBar
+					filterText={this.state.filterText}
+					inStockOnly={this.state.inStockOnly}
+					onUserInput={this.handleUserInput}
+				 />
+				<ProductTable 
+					products={this.state.data}
+					filterText={this.state.filterText}
+					inStockOnly={this.state.inStockOnly}
+				 />
 			</div>
 		);
-	}
+	},
 });
-
 
 
 var ProductCategoryRow = React.createClass({
@@ -58,7 +75,7 @@ var ProductCategoryRow = React.createClass({
 				<th colSpan="2">{this.props.category}</th>
 			</tr>
 		);
-	}
+	},
 });
 
 
@@ -89,7 +106,7 @@ var ProductRow = React.createClass({
 				<td>{this.props.product.price}</td>
 			</tr>
 		);
-	}
+	},
 });
 
 var ProductTable = React.createClass({
@@ -110,12 +127,15 @@ var ProductTable = React.createClass({
 		var rows = [];
 		var lastCategory = null;
 		this.props.products.forEach(function(product){
-			if(product.category !== lastCategory){
-				rows.push(<ProductCategoryRow category={product.category} key={product.category}/>);
+			if(product.name.indexOf(this.props.filterText) === -1 || (!product.stocked && this.props.inStockOnly)){
+				return;
 			}
-			rows.push(<ProductRow product={product} key={product.name}/>);
+			if(product.category !== lastCategory){
+				rows.push(<ProductCategoryRow category={product.category} key={product.category} />);
+			}
+			rows.push(<ProductRow product={product} key={product.name} />);
 			lastCategory = product.category;
-		});
+		}.bind(this));
 
 		return (
 			<table>
@@ -130,22 +150,39 @@ var ProductTable = React.createClass({
 				</tbody>
 			</table>
 		);
-	}
+	},
 });
 
 var SearchBar = React.createClass({
+	handleChange:function(){
+		this.props.onUserInput(
+			this.refs.filterTextInput.value,
+			this.refs.inStockOnlyInput.checked,
+		);
+	},
 	render:function(){
 		return (
 			<form>
-				<input type="text" placeholder="Search..."/>
+				<input 
+					type="text" 
+					placeholder="Search..." 
+					value={this.props.filterText}
+					ref="filterTextInput"
+					onChange={this.handleChange}
+				/>
 				<p>
-					<input type="checkbox"/>
+					<input 
+						type="checkbox" 
+						checked={this.props.inStockOnly}
+						ref="inStockOnlyInput"
+						onChange={this.handleChange}
+					/>
 					{' '}
 					Only show products in stock
 				</p>
 			</form>
 		);
-	}
+	},
 });
 
 
