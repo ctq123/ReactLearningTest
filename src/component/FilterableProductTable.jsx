@@ -1,17 +1,57 @@
 import React from 'react';
 
 var FilterableProductTable = React.createClass({
+	loadCommentsFromServer:function(){
+		$.ajax({
+			type: "get",
+			url:this.props.getUrl,
+			dataType:'json',
+			cache:false,
+			success:function(data){
+				console.log("FilterableProductTable.data="+data);
+				this.setState({data:data});
+			}.bind(this),
+			error:function(xhr,status,err){
+				console.error(this.props.getUrl, status, err.toString());
+			}.bind(this)
+		});
+	},
+	getInitialState:function(){
+		return {
+			data:[]
+		};
+	},
+	//异步请求数据渲染
+	componentDidMount:function(){
+		this.loadCommentsFromServer();
+		//setInterval(this.loadCommentsFromServer, this.props.pollInterval);
+	},
 	render:function(){
 		return (
 			<div>
 				<SearchBar />
-				<ProductTable products={this.props.products}/>
+				<ProductTable products={this.state.data}/>
 			</div>
 		);
 	}
 });
 
+
+
 var ProductCategoryRow = React.createClass({
+	// getInitialState:function(){
+	// 	return {
+	// 		category:this.props.category
+	// 	};
+	// },
+	// componentWillReceiveProps:function(nextProps){
+	// 	console.log("ProductCategoryRow.nextProps="+nextProps);
+	// 	if(nextProps.category){
+	// 		this.setState({
+	// 			category:nextProps.category
+	// 		});
+	// 	}
+	// },
 	render:function(){
 		return(
 			<tr>
@@ -23,6 +63,20 @@ var ProductCategoryRow = React.createClass({
 
 
 var ProductRow = React.createClass({
+	// getInitialState:function(){
+	// 	const _props = this.props;
+	// 	return {
+	// 		product: _props.product
+	// 	};
+	// },
+	// componentWillReceiveProps:function(nextProps){
+	// 	console.log("ProductRow.nextProps="+nextProps);
+	// 	if (nextProps.product){
+	// 		this.setState({
+	// 			product: nextProps.product
+	// 		});
+	// 	}
+	// },
 	render:function(){
 		var name = this.props.product.stocked?
 					this.props.product.name:
@@ -39,6 +93,19 @@ var ProductRow = React.createClass({
 });
 
 var ProductTable = React.createClass({
+	// getInitialState:function(){
+	// 	return {
+	// 		products:this.props.products
+	// 	};
+	// },
+	// componentWillReceiveProps:function(nextProps){
+	// 	console.log("ProductTable.nextProps="+nextProps);
+	// 	if(nextProps.products){
+	// 		this.setState({
+	// 			products:nextProps.products
+	// 		});
+	// 	}
+	// },
 	render:function(){
 		var rows = [];
 		var lastCategory = null;

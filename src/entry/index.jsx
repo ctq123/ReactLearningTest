@@ -22,6 +22,9 @@ import JsonData_Products from '../data/JsonData_Products';
 // );
 
 ReactDOM.render(
-	React.createElement(FilterableProductTable, {products:JsonData_Products}),
+	// React.createElement(FilterableProductTable, {products:JsonData_Products}),
+	<FilterableProductTable 
+		getUrl="http://localhost/SpringSecurityTestProject/test/getList"
+	 />,
 	document.getElementById('react-content')
 );
