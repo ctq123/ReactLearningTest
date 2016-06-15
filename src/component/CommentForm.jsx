@@ -4,13 +4,13 @@ var CommentForm = React.createClass({
 	handleSubmit:function(e){
 		e.preventDefault();
 		var author = this.refs.author.value.trim();
-		var text = this.refs.text.value.trim();
-		if(!text||!author){
+		var content = this.refs.content.value.trim();
+		if(!content||!author){
 			return;
 		}
-		this.props.onCommentSubmit({author:author, text:text});
+		this.props.onCommentSubmit({id:2,author:author, content:content});
 		this.refs.author.value = '';
-		this.refs.text.value = '';
+		this.refs.content.value = '';
 		return;
 	},
 	render:function(){
@@ -18,7 +18,7 @@ var CommentForm = React.createClass({
 			<form className="commentForm" onSubmit={this.handleSubmit}>
 				<input type="text" placeholder="Your name" ref="author"/>
 				<br/>
-				<input type="text" placeholder="Say something..." ref="text"/>
+				<input type="text" placeholder="Say something..." ref="content"/>
 				<br/>
 				<input type="submit" value="submit"/>
 			</form>

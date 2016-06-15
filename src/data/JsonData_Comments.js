@@ -1,8 +1,8 @@
 //json数据
 var JsonData_Comments= [
-	{author:"Jack",text:"this is one comment."},
-	{author:"Lorry",text:"this is anothor comment."},
-	{author:"Mahome",text:"I like it."}
+	{author:"Jack",content:"this is one comment."},
+	{author:"Lorry",content:"this is anothor comment."},
+	{author:"Mahome",content:"I like it."}
 ];
 
 export default JsonData_Comments;
