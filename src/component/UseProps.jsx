@@ -24,7 +24,7 @@ var FancyCheckBox = React.createClass({
 			checked: false,
 		};
 	},
-	handleClick:function(event) {
+	handleChange:function(event) {
 		this.setState({
 			checked: !this.state.checked,
 		});
@@ -37,7 +37,7 @@ var FancyCheckBox = React.createClass({
 			<label>
 				<input
 					checked = {this.state.checked}
-					onClick = {this.handleClick}
+					onChange = {this.handleChange}
 					type = "checkbox"
 				/>
 				<span style = {{border}}>
