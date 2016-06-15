@@ -10,6 +10,7 @@ import FilterableProductTable from '../component/FilterableProductTable';
 import JsonData_Products from '../data/JsonData_Products';
 
 import TickTock from '../component/UseMixins';
+import FancyDiv from '../component/UseProps';
 
 //pollInterval={2000} 
 //ReactDOM.render(<App />, document.getElementById('react-content'));
@@ -35,7 +36,12 @@ import TickTock from '../component/UseMixins';
 // 	document.getElementById('react-content')
 // );
 
+// ReactDOM.render(
+// 	React.createElement(TickTock),
+// 	document.getElementById('react-content')
+// );
+
 ReactDOM.render(
-	React.createElement(TickTock),
+	<FancyDiv title="this container" color="green"/>,
 	document.getElementById('react-content')
 );
